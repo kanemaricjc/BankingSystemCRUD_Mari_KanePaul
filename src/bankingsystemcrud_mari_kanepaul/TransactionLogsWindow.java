@@ -8,14 +8,14 @@ package bankingsystemcrud_mari_kanepaul;
  *
  * @author Kane
  */
-public class searchAccountFrame extends javax.swing.JFrame {
+public class TransactionLogsWindow extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(searchAccountFrame.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TransactionLogsWindow.class.getName());
 
     /**
-     * Creates new form searchAccountFrame
+     * Creates new form TransactionLogsWindow
      */
-    public searchAccountFrame() {
+    public TransactionLogsWindow() {
         initComponents();
     }
 
@@ -66,7 +66,7 @@ public class searchAccountFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new searchAccountFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TransactionLogsWindow().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

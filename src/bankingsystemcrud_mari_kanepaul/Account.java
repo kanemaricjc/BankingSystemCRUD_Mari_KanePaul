@@ -13,7 +13,7 @@ public class Account {
     private int accountid;
     private int customerid;
     private String accounttype;
-    private int balance;
+    private long balance;
 
     public Account(int accountid, int customerid, String accounttype, int balance) {
         this.accountid = accountid;
@@ -57,11 +57,11 @@ public class Account {
         this.accounttype = accounttype;
     }
 
-    public int getBalance() {
+    public long getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(long balance) {
         this.balance = balance;
     }
     

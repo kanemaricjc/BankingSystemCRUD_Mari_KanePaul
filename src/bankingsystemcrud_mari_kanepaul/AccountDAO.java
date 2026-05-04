@@ -25,7 +25,7 @@ public class AccountDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, account.getCustomerid());
             stmt.setString(2, account.getAccounttype());
-            stmt.setInt(3, account.getBalance());
+            stmt.setLong(3, account.getBalance());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,4 +125,31 @@ public class AccountDAO {
         }
         return null;
     }
+    
+    public List<AccountDetails> getAllAccountsWithNames() {
+    List<AccountDetails> list = new ArrayList<>();
+    String sql = "SELECT a.account_id, c.first_name, c.last_name, c.email, c.phone_number, a.account_type, a.balance " +
+                 "FROM Account a JOIN Customer c ON a.Customer_customer_id = c.customer_id";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            list.add(new AccountDetails(
+                rs.getInt("account_id"),
+                rs.getString("first_name"),
+                rs.getString("last_name"),
+                rs.getString("email"),
+                rs.getString("phone_number"),
+                rs.getString("account_type"),
+                rs.getLong("balance")
+            ));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+    
 }

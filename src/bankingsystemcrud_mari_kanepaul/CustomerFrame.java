@@ -4,6 +4,13 @@
  */
 package bankingsystemcrud_mari_kanepaul;
 
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Kane
@@ -15,8 +22,45 @@ public class CustomerFrame extends javax.swing.JFrame {
     /**
      * Creates new form CustomerFrame
      */
+    
+    private void gotoPnlTable() {
+    CardLayout cl = (CardLayout) parentPanel.getLayout();
+    cl.show(parentPanel, "viewTableCard");
+    }
+    
+    private void centerTableText() {
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < jTable1.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+    
+    void refreshTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); 
+    
+    CustomerDAO dao = new CustomerDAO();
+    List<Customer> list = dao.getAllCustomers();
+    for (Customer c : list) {
+        Object[] row = {
+            c.getCustomerid(),
+            c.getFname(),
+            c.getLname(),
+            c.getEmail(),
+            c.getPhonenumber()
+        };      
+        model.addRow(row);
+    }
+    }
+    
     public CustomerFrame() {
         initComponents();
+        refreshTable();
+        centerTableText();
     }
 
     /**
@@ -27,23 +71,543 @@ public class CustomerFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        btnBack = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        parentPanel = new javax.swing.JPanel();
+        pnlTable = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        searchField = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        addCustomerCard = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        addnewStudentLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        firstNameField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        lastNameField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        numberField = new javax.swing.JTextField();
+        addCustomerBtn = new javax.swing.JButton();
+        delCustomerCard = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        delCustomerBtn = new javax.swing.JButton();
+
+        jMenuItem1.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jMenuItem1.setText("Update");
+        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(858, 60));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setPreferredSize(new java.awt.Dimension(60, 75));
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        btnBack.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(153, 153, 153));
+        btnBack.setText("Back");
+        btnBack.setBorderPainted(false);
+        btnBack.setContentAreaFilled(false);
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack.setFocusPainted(false);
+        btnBack.addActionListener(this::btnBackActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(btnBack, gridBagConstraints);
+
+        jPanel2.add(jPanel6);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setPreferredSize(new java.awt.Dimension(266, 75));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jButton1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 153, 153));
+        jButton1.setText("Add Customer");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setDefaultCapable(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPanel3.add(jButton1, new java.awt.GridBagConstraints());
+
+        jPanel2.add(jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setPreferredSize(new java.awt.Dimension(266, 75));
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jButton2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(153, 153, 153));
+        jButton2.setText("View Customers");
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setDefaultCapable(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setFocusable(false);
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(26, 89, 26, 90);
+        jPanel4.add(jButton2, gridBagConstraints);
+
+        jPanel2.add(jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setPreferredSize(new java.awt.Dimension(266, 75));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        jButton3.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(153, 153, 153));
+        jButton3.setText("Delete Customer");
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setDefaultCapable(false);
+        jButton3.setFocusPainted(false);
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+        jPanel5.add(jButton3, new java.awt.GridBagConstraints());
+
+        jPanel2.add(jPanel5);
+
+        parentPanel.setLayout(new java.awt.CardLayout());
+
+        pnlTable.setBackground(new java.awt.Color(240, 244, 249));
+        pnlTable.setPreferredSize(new java.awt.Dimension(746, 60));
+        pnlTable.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(786, 30));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Search by:");
+        jPanel1.add(jLabel1);
+
+        searchField.setPreferredSize(new java.awt.Dimension(150, 22));
+        jPanel1.add(searchField);
+
+        jButton5.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jButton5.setText("Customer Name");
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setDefaultCapable(false);
+        jButton5.setFocusPainted(false);
+        jButton5.setFocusable(false);
+        jButton5.addActionListener(this::jButton5ActionPerformed);
+        jPanel1.add(jButton5);
+
+        jButton6.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jButton6.setText("Customer ID");
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.setDefaultCapable(false);
+        jButton6.setFocusPainted(false);
+        jButton6.setFocusable(false);
+        jButton6.addActionListener(this::jButton6ActionPerformed);
+        jPanel1.add(jButton6);
+
+        pnlTable.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jTable1.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Customer ID", "First Name", "Last Name", "Email", "Phone Number"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        pnlTable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        parentPanel.add(pnlTable, "viewTableCard");
+
+        addCustomerCard.setBackground(new java.awt.Color(240, 244, 249));
+        addCustomerCard.setLayout(new java.awt.GridBagLayout());
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel7.setPreferredSize(new java.awt.Dimension(606, 357));
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        addnewStudentLabel.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        addnewStudentLabel.setForeground(new java.awt.Color(153, 153, 153));
+        addnewStudentLabel.setText("Add new Customer");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
+        jPanel7.add(addnewStudentLabel, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel2.setText("First Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel7.add(jLabel2, gridBagConstraints);
+
+        firstNameField.setMinimumSize(new java.awt.Dimension(300, 30));
+        firstNameField.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        jPanel7.add(firstNameField, gridBagConstraints);
+
+        jLabel3.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel3.setText("Last Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel7.add(jLabel3, gridBagConstraints);
+
+        lastNameField.setMinimumSize(new java.awt.Dimension(300, 30));
+        lastNameField.setPreferredSize(new java.awt.Dimension(300, 30));
+        lastNameField.addActionListener(this::lastNameFieldActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        jPanel7.add(lastNameField, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel4.setText("Email:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel7.add(jLabel4, gridBagConstraints);
+
+        emailField.setMinimumSize(new java.awt.Dimension(300, 30));
+        emailField.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        jPanel7.add(emailField, gridBagConstraints);
+
+        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel5.setText("Phone Number:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel7.add(jLabel5, gridBagConstraints);
+
+        numberField.setMinimumSize(new java.awt.Dimension(300, 30));
+        numberField.setPreferredSize(new java.awt.Dimension(300, 30));
+        numberField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                numberFieldKeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        jPanel7.add(numberField, gridBagConstraints);
+
+        addCustomerBtn.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        addCustomerBtn.setText("Add");
+        addCustomerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addCustomerBtn.addActionListener(this::addCustomerBtnActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
+        jPanel7.add(addCustomerBtn, gridBagConstraints);
+
+        addCustomerCard.add(jPanel7, new java.awt.GridBagConstraints());
+
+        parentPanel.add(addCustomerCard, "addCustomerCard");
+
+        delCustomerCard.setBackground(new java.awt.Color(240, 244, 249));
+        delCustomerCard.setLayout(new java.awt.GridBagLayout());
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel8.setPreferredSize(new java.awt.Dimension(606, 357));
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel6.setText("Delete Customer");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 120, 0);
+        jPanel8.add(jLabel6, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel7.setText("Customer ID:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel8.add(jLabel7, gridBagConstraints);
+
+        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextField1.setDragEnabled(true);
+        jTextField1.setPreferredSize(new java.awt.Dimension(300, 30));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel8.add(jTextField1, gridBagConstraints);
+
+        delCustomerBtn.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        delCustomerBtn.setText("Delete ");
+        delCustomerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        delCustomerBtn.setPreferredSize(new java.awt.Dimension(96, 23));
+        delCustomerBtn.addActionListener(this::delCustomerBtnActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(120, 0, 0, 0);
+        jPanel8.add(delCustomerBtn, gridBagConstraints);
+
+        delCustomerCard.add(jPanel8, new java.awt.GridBagConstraints());
+
+        parentPanel.add(delCustomerCard, "delCustomerCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(parentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, 0)
+                    .addComponent(parentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new MainMenu().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        CardLayout cl = (CardLayout) parentPanel.getLayout();
+        cl.show(parentPanel, "addCustomerCard");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        gotoPnlTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        CardLayout cl = (CardLayout) parentPanel.getLayout();
+        cl.show(parentPanel, "delCustomerCard");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+             if (evt.isPopupTrigger() && evt.getComponent() instanceof javax.swing.JTable) {
+            int row = jTable1.rowAtPoint(evt.getPoint());
+            if (row >= 0 && row < jTable1.getRowCount()) {
+                jTable1.setRowSelectionInterval(row, row); // Select the row
+                // Show the popup menu (make sure jPopupMenu1 matches your variable name)
+                jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void delCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delCustomerBtnActionPerformed
+
+        String idStr = jTextField1.getText();
+
+        if(idStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a Student ID to delete.");
+            return;
+        }
+
+        try {
+            int customerId = Integer.parseInt(idStr);
+            CustomerDAO dao = new CustomerDAO();
+            boolean isDeleted = dao.deleteCustomer(customerId);
+
+            if (isDeleted) {
+                JOptionPane.showMessageDialog(this, "Customer deleted successfully!");
+                jTextField1.setText("");
+                refreshTable();
+                gotoPnlTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Customer ID not found!");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ID must be a valid number!");
+        }
+    }//GEN-LAST:event_delCustomerBtnActionPerformed
+
+    private void lastNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameFieldActionPerformed
+
+    }//GEN-LAST:event_lastNameFieldActionPerformed
+
+    private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
+
+        String fName = firstNameField.getText();
+        String lName = lastNameField.getText();
+        String email = emailField.getText();
+        String phonenumber = numberField.getText();
+        
+
+        if (fName.isEmpty() || lName.isEmpty() || phonenumber.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields!");
+            return;
+        }
+
+        Customer newCustomer = new Customer(fName,lName,email,phonenumber);
+        CustomerDAO dao = new CustomerDAO();
+
+        boolean isAdded = dao.addCustomer(newCustomer);
+
+        if (isAdded) {
+            JOptionPane.showMessageDialog(this, "Customer added successfully!");
+            firstNameField.setText("");
+            lastNameField.setText("");
+            emailField.setText("");
+            numberField.setText("");
+            refreshTable();
+            gotoPnlTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to add customer.");
+        }
+
+    }//GEN-LAST:event_addCustomerBtnActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    
+    int selectedRow = jTable1.getSelectedRow();
+    
+    if (selectedRow != -1) {
+        
+        int id = (int) jTable1.getValueAt(selectedRow, 0);
+        String fName = jTable1.getValueAt(selectedRow, 1).toString();
+        String lName = jTable1.getValueAt(selectedRow, 2).toString();
+        String email = jTable1.getValueAt(selectedRow, 3).toString();
+        String phonenumber = jTable1.getValueAt(selectedRow, 4).toString();
+
+        UpdateCustomerFrame updateFrame = new UpdateCustomerFrame(this, id, fName, lName, email, phonenumber);
+        updateFrame.setVisible(true);
+    }
+    
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void numberFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberFieldKeyTyped
+    
+        char c = evt.getKeyChar();
+    
+    if (!Character.isDigit(c)) {
+        evt.consume();
+    }
+    // TODO add your handling code here:
+    }//GEN-LAST:event_numberFieldKeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    
+        char c = evt.getKeyChar();
+    
+    if (!Character.isDigit(c)) {
+        evt.consume();
+    }        
+
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -71,5 +635,43 @@ public class CustomerFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCustomerBtn;
+    private javax.swing.JPanel addCustomerCard;
+    private javax.swing.JLabel addnewStudentLabel;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton delCustomerBtn;
+    private javax.swing.JPanel delCustomerCard;
+    private javax.swing.JTextField emailField;
+    private javax.swing.JTextField firstNameField;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField lastNameField;
+    private javax.swing.JTextField numberField;
+    private javax.swing.JPanel parentPanel;
+    private javax.swing.JPanel pnlTable;
+    private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
 }

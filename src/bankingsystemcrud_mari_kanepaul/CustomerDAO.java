@@ -36,7 +36,7 @@ public class CustomerDAO {
     
     public List<Customer> getAllCustomers() {
     List<Customer> customers = new ArrayList<>();
-    String sql = "SELECT * FROM students";
+    String sql = "SELECT * FROM customer";
     try (Connection conn = DBConnection.getConnection();
          Statement stmt = conn.createStatement();
          ResultSet rs = stmt.executeQuery(sql)) {
@@ -60,7 +60,7 @@ public class CustomerDAO {
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, customer.getFname());
-            stmt.setString(1, customer.getLname());
+            stmt.setString(2, customer.getLname());
             stmt.setString(3, customer.getEmail());
             stmt.setString(4, customer.getPhonenumber());
             stmt.setInt(5, customer.getCustomerid());

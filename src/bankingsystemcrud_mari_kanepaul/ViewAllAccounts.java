@@ -4,6 +4,13 @@
  */
 package bankingsystemcrud_mari_kanepaul;
 
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Kane
@@ -12,11 +19,50 @@ public class ViewAllAccounts extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewAllAccounts.class.getName());
 
+    private void gotoPnlTable() {
+    CardLayout cl = (CardLayout) parentPanel.getLayout();
+    cl.show(parentPanel, "viewTableCard");
+    }
+    
+    private void centerTableText() {
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < jTable1.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+    
+    void refreshTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); 
+    
+    AccountDAO acdao = new AccountDAO();
+    List<AccountDetails> accountList = acdao.getAllAccountsWithNames();
+    
+    for (AccountDetails details : accountList) {
+        Object[] row = {
+    details.getAccountId(),
+    details.getFirstName(),      
+    details.getLastName(),       
+    details.getEmail(),                          
+    details.getPhonenumber(),                                               
+    details.getAccountType(),    
+    details.getBalance()         
+};
+        model.addRow(row); 
+    }
+}   
+    
     /**
      * Creates new form ViewAllAccounts
      */
     public ViewAllAccounts() {
         initComponents();
+        refreshTable();
+        centerTableText();
     }
 
     /**
@@ -27,23 +73,479 @@ public class ViewAllAccounts extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        btnBack = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        parentPanel = new javax.swing.JPanel();
+        pnlTable = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        searchField = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        addAccountCard = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        addnewAccountLabel = new javax.swing.JLabel();
+        customerIdLabel = new javax.swing.JLabel();
+        idField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        balanceField = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        accountTypeCombo = new javax.swing.JComboBox<>();
+        delAccountCard = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
+
+        jMenuItem1.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jMenuItem1.setText("Update");
+        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Banking System");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(858, 60));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setPreferredSize(new java.awt.Dimension(60, 75));
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        btnBack.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(153, 153, 153));
+        btnBack.setText("Back");
+        btnBack.setBorderPainted(false);
+        btnBack.setContentAreaFilled(false);
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack.setFocusPainted(false);
+        btnBack.addActionListener(this::btnBackActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(btnBack, gridBagConstraints);
+
+        jPanel2.add(jPanel6);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setPreferredSize(new java.awt.Dimension(266, 75));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jButton1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 153, 153));
+        jButton1.setText("Create Account");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setDefaultCapable(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPanel3.add(jButton1, new java.awt.GridBagConstraints());
+
+        jPanel2.add(jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setPreferredSize(new java.awt.Dimension(266, 75));
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jButton2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(153, 153, 153));
+        jButton2.setText("View Accounts");
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setDefaultCapable(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setFocusable(false);
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(26, 89, 26, 90);
+        jPanel4.add(jButton2, gridBagConstraints);
+
+        jPanel2.add(jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setPreferredSize(new java.awt.Dimension(266, 75));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        jButton3.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(153, 153, 153));
+        jButton3.setText("Delete Account");
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setDefaultCapable(false);
+        jButton3.setFocusPainted(false);
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+        jPanel5.add(jButton3, new java.awt.GridBagConstraints());
+
+        jPanel2.add(jPanel5);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
+
+        parentPanel.setLayout(new java.awt.CardLayout());
+
+        pnlTable.setBackground(new java.awt.Color(240, 244, 249));
+        pnlTable.setPreferredSize(new java.awt.Dimension(746, 60));
+        pnlTable.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(786, 30));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Search by:");
+        jPanel1.add(jLabel1);
+
+        searchField.setPreferredSize(new java.awt.Dimension(150, 22));
+        jPanel1.add(searchField);
+
+        jButton5.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jButton5.setText("Customer Name");
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setDefaultCapable(false);
+        jButton5.setFocusPainted(false);
+        jButton5.setFocusable(false);
+        jButton5.addActionListener(this::jButton5ActionPerformed);
+        jPanel1.add(jButton5);
+
+        jButton6.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jButton6.setText("Account ID");
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.setDefaultCapable(false);
+        jButton6.setFocusPainted(false);
+        jButton6.setFocusable(false);
+        jButton6.addActionListener(this::jButton6ActionPerformed);
+        jPanel1.add(jButton6);
+
+        pnlTable.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jTable1.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Account ID", "First Name", "Last Name", "Email", "Phone Number", "Account Type", "Balance"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        pnlTable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        parentPanel.add(pnlTable, "viewTableCard");
+
+        addAccountCard.setBackground(new java.awt.Color(240, 244, 249));
+        addAccountCard.setLayout(new java.awt.GridBagLayout());
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel7.setPreferredSize(new java.awt.Dimension(606, 357));
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        addnewAccountLabel.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        addnewAccountLabel.setForeground(new java.awt.Color(153, 153, 153));
+        addnewAccountLabel.setText("Add new Account");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
+        jPanel7.add(addnewAccountLabel, gridBagConstraints);
+
+        customerIdLabel.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        customerIdLabel.setForeground(new java.awt.Color(153, 153, 153));
+        customerIdLabel.setText("Customer ID:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel7.add(customerIdLabel, gridBagConstraints);
+
+        idField.setMinimumSize(new java.awt.Dimension(300, 30));
+        idField.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        jPanel7.add(idField, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel4.setText("Account Type:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel7.add(jLabel4, gridBagConstraints);
+
+        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel5.setText("Balance:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel7.add(jLabel5, gridBagConstraints);
+
+        balanceField.setMinimumSize(new java.awt.Dimension(300, 30));
+        balanceField.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        jPanel7.add(balanceField, gridBagConstraints);
+
+        jButton4.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jButton4.setText("Add");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.addActionListener(this::jButton4ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
+        jPanel7.add(jButton4, gridBagConstraints);
+
+        accountTypeCombo.setMaximumRowCount(2);
+        accountTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Savings", "Current" }));
+        accountTypeCombo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        accountTypeCombo.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        jPanel7.add(accountTypeCombo, gridBagConstraints);
+
+        addAccountCard.add(jPanel7, new java.awt.GridBagConstraints());
+
+        parentPanel.add(addAccountCard, "addAccountCard");
+
+        delAccountCard.setBackground(new java.awt.Color(240, 244, 249));
+        delAccountCard.setLayout(new java.awt.GridBagLayout());
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel8.setPreferredSize(new java.awt.Dimension(606, 357));
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel6.setText("Delete Account");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 120, 0);
+        jPanel8.add(jLabel6, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel7.setText("Account ID:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel8.add(jLabel7, gridBagConstraints);
+
+        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextField1.setDragEnabled(true);
+        jTextField1.setPreferredSize(new java.awt.Dimension(300, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel8.add(jTextField1, gridBagConstraints);
+
+        jButton7.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jButton7.setText("Delete ");
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton7.setPreferredSize(new java.awt.Dimension(96, 23));
+        jButton7.addActionListener(this::jButton7ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(120, 0, 0, 0);
+        jPanel8.add(jButton7, gridBagConstraints);
+
+        delAccountCard.add(jPanel8, new java.awt.GridBagConstraints());
+
+        parentPanel.add(delAccountCard, "delAccountCard");
+
+        getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
 
         setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new MainMenu().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        CardLayout cl = (CardLayout) parentPanel.getLayout();
+        cl.show(parentPanel, "addAccountCard");
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        gotoPnlTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        CardLayout cl = (CardLayout) parentPanel.getLayout();
+        cl.show(parentPanel, "delAccountCard");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        if (evt.isPopupTrigger() && evt.getComponent() instanceof javax.swing.JTable) {
+            int row = jTable1.rowAtPoint(evt.getPoint());
+            if (row >= 0 && row < jTable1.getRowCount()) {
+                jTable1.setRowSelectionInterval(row, row); 
+                jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }        
+        
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    String IdStr = idField.getText();
+    String accountType = accountTypeCombo.getSelectedItem().toString();
+    String balStr = balanceField.getText();
+    int balance;
+    int id;
+    
+    if ( IdStr.isEmpty() || accountType.isEmpty() || balStr.isEmpty() ) {
+        JOptionPane.showMessageDialog(this, "Please fill all fields.");
+        return;
+    }
+    
+    try {
+        balance = Integer.parseInt(balStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Balance must be a valid number!");
+        return;
+    }
+    
+    try {
+        id = Integer.parseInt(IdStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Customer ID must be a valid number!");
+        return;
+    }
+    
+    
+    Account newAccount = new Account(id,accountType,balance);
+    AccountDAO dao = new AccountDAO();
+    
+    boolean isAdded = dao.addAccount(newAccount);
+    
+    if (isAdded) {
+            JOptionPane.showMessageDialog(this, "Account created successfully!");
+            idField.setText("");
+            balanceField.setText("");
+            refreshTable();
+            gotoPnlTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to create account.");
+        }
+    
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+
+        String idStr = jTextField1.getText();
+
+        if(idStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a Student ID to delete.");
+            return;
+        }
+
+        try {
+            int accId = Integer.parseInt(idStr);
+            AccountDAO dao = new AccountDAO();
+            boolean isDeleted = dao.deleteAccount(accId);
+
+            if (isDeleted) {
+                JOptionPane.showMessageDialog(this, "Account deleted successfully!");
+                jTextField1.setText("");
+                refreshTable();
+                gotoPnlTable();
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Account ID not found!");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ID must be a valid number!");
+        }
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    
+    int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow != -1) {
+        
+    }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -71,5 +573,41 @@ public class ViewAllAccounts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> accountTypeCombo;
+    private javax.swing.JPanel addAccountCard;
+    private javax.swing.JLabel addnewAccountLabel;
+    private javax.swing.JTextField balanceField;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JLabel customerIdLabel;
+    private javax.swing.JPanel delAccountCard;
+    private javax.swing.JTextField idField;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel parentPanel;
+    private javax.swing.JPanel pnlTable;
+    private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
 }

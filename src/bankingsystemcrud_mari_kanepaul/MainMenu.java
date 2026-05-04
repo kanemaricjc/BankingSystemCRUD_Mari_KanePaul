@@ -29,37 +29,23 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        addAccBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         viewAccBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        delAccBtn = new javax.swing.JButton();
+        viewTransactionBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setPreferredSize(new java.awt.Dimension(140, 150));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        addAccBtn.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        addAccBtn.setForeground(new java.awt.Color(153, 153, 153));
-        addAccBtn.setText("<html><center>Add/Update<br>Account</center></html>");
-        addAccBtn.setBorderPainted(false);
-        addAccBtn.setContentAreaFilled(false);
-        addAccBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addAccBtn.setDefaultCapable(false);
-        addAccBtn.setFocusPainted(false);
-        addAccBtn.addActionListener(this::addAccBtnActionPerformed);
-        jPanel1.add(addAccBtn, new java.awt.GridBagConstraints());
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
+        setResizable(false);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel2.setPreferredSize(new java.awt.Dimension(140, 150));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         viewAccBtn.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         viewAccBtn.setForeground(new java.awt.Color(153, 153, 153));
-        viewAccBtn.setText("View Account");
+        viewAccBtn.setText("<html><center>View<br>Accounts</center></html>");
         viewAccBtn.setBorderPainted(false);
         viewAccBtn.setContentAreaFilled(false);
         viewAccBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -68,47 +54,64 @@ public class MainMenu extends javax.swing.JFrame {
         viewAccBtn.addActionListener(this::viewAccBtnActionPerformed);
         jPanel2.add(viewAccBtn, new java.awt.GridBagConstraints());
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel2);
 
         jPanel3.setPreferredSize(new java.awt.Dimension(140, 150));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        delAccBtn.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        delAccBtn.setForeground(new java.awt.Color(153, 153, 153));
-        delAccBtn.setText("Delete Account");
-        delAccBtn.setBorderPainted(false);
-        delAccBtn.setContentAreaFilled(false);
-        delAccBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        delAccBtn.setDefaultCapable(false);
-        delAccBtn.setFocusPainted(false);
-        delAccBtn.addActionListener(this::delAccBtnActionPerformed);
+        viewTransactionBtn.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        viewTransactionBtn.setForeground(new java.awt.Color(153, 153, 153));
+        viewTransactionBtn.setText("<html><center>View<br>Transactions</center></html>");
+        viewTransactionBtn.setBorderPainted(false);
+        viewTransactionBtn.setContentAreaFilled(false);
+        viewTransactionBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        viewTransactionBtn.setDefaultCapable(false);
+        viewTransactionBtn.setFocusPainted(false);
+        viewTransactionBtn.addActionListener(this::viewTransactionBtnActionPerformed);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(59, 32, 60, 33);
-        jPanel3.add(delAccBtn, gridBagConstraints);
+        jPanel3.add(viewTransactionBtn, gridBagConstraints);
 
-        getContentPane().add(jPanel3, java.awt.BorderLayout.EAST);
+        getContentPane().add(jPanel3);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(140, 150));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jButton1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 153, 153));
+        jButton1.setText("<html><center>View<br>Customers</center></html>");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setDefaultCapable(false);
+        jButton1.setFocusPainted(false);
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPanel1.add(jButton1, new java.awt.GridBagConstraints());
+
+        getContentPane().add(jPanel1);
 
         setSize(new java.awt.Dimension(420, 150));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAccBtnActionPerformed
-        new addorupdateframe().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_addAccBtnActionPerformed
-
     private void viewAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAccBtnActionPerformed
-        new searchAccountFrame().setVisible(true);
+        new ViewAllAccounts().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_viewAccBtnActionPerformed
 
-    private void delAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delAccBtnActionPerformed
+    private void viewTransactionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTransactionBtnActionPerformed
         new delAccountFrame().setVisible(true);
         this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_delAccBtnActionPerformed
+    }//GEN-LAST:event_viewTransactionBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new CustomerFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,11 +139,11 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addAccBtn;
-    private javax.swing.JButton delAccBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton viewAccBtn;
+    private javax.swing.JButton viewTransactionBtn;
     // End of variables declaration//GEN-END:variables
 }
