@@ -76,7 +76,8 @@ public class ViewAllAccounts extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        depMenu = new javax.swing.JMenuItem();
+        withMenu = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
@@ -91,8 +92,9 @@ public class ViewAllAccounts extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         searchField = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        nameSearch = new javax.swing.JButton();
+        idSearch = new javax.swing.JButton();
+        allSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         addAccountCard = new javax.swing.JPanel();
@@ -112,10 +114,14 @@ public class ViewAllAccounts extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
 
-        jMenuItem1.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
-        jMenuItem1.setText("Update");
-        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
-        jPopupMenu1.add(jMenuItem1);
+        depMenu.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        depMenu.setText("Deposit");
+        depMenu.addActionListener(this::depMenuActionPerformed);
+        jPopupMenu1.add(depMenu);
+
+        withMenu.setText("Withdraw");
+        withMenu.addActionListener(this::withMenuActionPerformed);
+        jPopupMenu1.add(withMenu);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Banking System");
@@ -221,23 +227,32 @@ public class ViewAllAccounts extends javax.swing.JFrame {
         searchField.setPreferredSize(new java.awt.Dimension(150, 22));
         jPanel1.add(searchField);
 
-        jButton5.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
-        jButton5.setText("Customer Name");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setDefaultCapable(false);
-        jButton5.setFocusPainted(false);
-        jButton5.setFocusable(false);
-        jButton5.addActionListener(this::jButton5ActionPerformed);
-        jPanel1.add(jButton5);
+        nameSearch.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        nameSearch.setText("Customer Name");
+        nameSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nameSearch.setDefaultCapable(false);
+        nameSearch.setFocusPainted(false);
+        nameSearch.setFocusable(false);
+        nameSearch.addActionListener(this::nameSearchActionPerformed);
+        jPanel1.add(nameSearch);
 
-        jButton6.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
-        jButton6.setText("Account ID");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setDefaultCapable(false);
-        jButton6.setFocusPainted(false);
-        jButton6.setFocusable(false);
-        jButton6.addActionListener(this::jButton6ActionPerformed);
-        jPanel1.add(jButton6);
+        idSearch.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        idSearch.setText("Account ID");
+        idSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        idSearch.setDefaultCapable(false);
+        idSearch.setFocusPainted(false);
+        idSearch.setFocusable(false);
+        idSearch.addActionListener(this::idSearchActionPerformed);
+        jPanel1.add(idSearch);
+
+        allSearch.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        allSearch.setText("All");
+        allSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        allSearch.setDefaultCapable(false);
+        allSearch.setFocusPainted(false);
+        allSearch.setFocusable(false);
+        allSearch.addActionListener(this::allSearchActionPerformed);
+        jPanel1.add(allSearch);
 
         pnlTable.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
@@ -446,6 +461,7 @@ public class ViewAllAccounts extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        
         if (evt.isPopupTrigger() && evt.getComponent() instanceof javax.swing.JTable) {
             int row = jTable1.rowAtPoint(evt.getPoint());
             if (row >= 0 && row < jTable1.getRowCount()) {
@@ -505,7 +521,7 @@ public class ViewAllAccounts extends javax.swing.JFrame {
         String idStr = jTextField1.getText();
 
         if(idStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a Student ID to delete.");
+            JOptionPane.showMessageDialog(this, "Please enter an Account ID to delete.");
             return;
         }
 
@@ -530,22 +546,102 @@ public class ViewAllAccounts extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void idSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idSearchActionPerformed
+    
+        String idStr = searchField.getText().trim();
+    
+    if (idStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter an ID to search.");
+        refreshTable(); 
+        return;
+    }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    try {
+        int id = Integer.parseInt(idStr);
+        AccountDAO dao = new AccountDAO(); 
+        AccountDetails details = dao.getAccountDetailsById(id); 
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (details != null) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0); 
+            
+            Object[] row = {
+                details.getAccountId(),
+                details.getFirstName(),      
+                details.getLastName(),       
+                details.getEmail(),                          
+                details.getPhonenumber(),                                               
+                details.getAccountType(), 
+                details.getBalance()
+            };
+            model.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "No account found with ID: " + id);
+            
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid ID format. Please enter a number.");
+    }
+
+    }//GEN-LAST:event_idSearchActionPerformed
+
+    private void nameSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameSearchActionPerformed
+        
+        String name = searchField.getText().trim();
+    if (name.isEmpty()) {
+        refreshTable(); // If empty, show everyone
+        return;
+    }
+
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); 
+
+    AccountDAO dao = new AccountDAO();
+    
+    List<AccountDetails> results = dao.searchAccountsByCustomerName(name);
+
+    for (AccountDetails details : results) {
+        Object[] row = {
+            details.getAccountId(),
+            details.getFirstName(),      
+            details.getLastName(),       
+            details.getEmail(),                          
+            details.getPhonenumber(),                                               
+            details.getAccountType(), 
+            details.getBalance()      
+        };
+        model.addRow(row); 
+    }
+        
+    }//GEN-LAST:event_nameSearchActionPerformed
+
+    private void depMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depMenuActionPerformed
     
     int selectedRow = jTable1.getSelectedRow();
     if (selectedRow != -1) {
-        
+        int accid = (int) jTable1.getValueAt(selectedRow,0);
+        new DepositFrame(this,accid).setVisible(true);
     }
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_depMenuActionPerformed
+
+    private void withMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withMenuActionPerformed
+        
+    int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow != -1) {
+        int accid = (int) jTable1.getValueAt(selectedRow, 0);
+        new WithdrawFrame(this, accid).setVisible(true);
+    }
+    
+    
+        // TODO add your handling code here:
+    }//GEN-LAST:event_withMenuActionPerformed
+
+    private void allSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allSearchActionPerformed
+    
+        refreshTable();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_allSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -576,24 +672,24 @@ public class ViewAllAccounts extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> accountTypeCombo;
     private javax.swing.JPanel addAccountCard;
     private javax.swing.JLabel addnewAccountLabel;
+    private javax.swing.JButton allSearch;
     private javax.swing.JTextField balanceField;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel customerIdLabel;
     private javax.swing.JPanel delAccountCard;
+    private javax.swing.JMenuItem depMenu;
     private javax.swing.JTextField idField;
+    private javax.swing.JButton idSearch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -606,8 +702,10 @@ public class ViewAllAccounts extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton nameSearch;
     private javax.swing.JPanel parentPanel;
     private javax.swing.JPanel pnlTable;
     private javax.swing.JTextField searchField;
+    private javax.swing.JMenuItem withMenu;
     // End of variables declaration//GEN-END:variables
 }

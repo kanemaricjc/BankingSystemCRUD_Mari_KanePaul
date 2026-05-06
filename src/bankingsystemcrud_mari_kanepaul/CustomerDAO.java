@@ -87,4 +87,56 @@ public class CustomerDAO {
         }
     }
     
+    public List<Customer> searchByID(int customerId) {
+        List<Customer> maincustomer = new ArrayList<>();
+    String sql = "SELECT * FROM customer WHERE customer_id=?";
+    try (Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, customerId);
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Customer customer = new Customer();
+                customer.setCustomerid(rs.getInt("customer_id"));
+                customer.setFname(rs.getString("first_name"));
+                customer.setLname(rs.getString("last_name"));
+                customer.setEmail(rs.getString("email"));
+                customer.setPhonenumber(rs.getString("phone_number"));
+                maincustomer.add(customer);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return maincustomer;
+    }
+    
+    public List<Customer> searchByName(String name) {
+    List<Customer> customers = new ArrayList<>();
+    
+    String sql = "SELECT * FROM customer WHERE first_name LIKE ? OR last_name LIKE ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        String searchPattern = "%" + name + "%";
+        stmt.setString(1, searchPattern);
+        stmt.setString(2, searchPattern);
+        
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Customer customer = new Customer();
+                customer.setCustomerid(rs.getInt("customer_id"));
+                customer.setFname(rs.getString("first_name"));
+                customer.setLname(rs.getString("last_name"));
+                customer.setEmail(rs.getString("email"));
+                customer.setPhonenumber(rs.getString("phone_number"));
+                customers.add(customer);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return customers;
+}
+    
+    
 }

@@ -4,6 +4,12 @@
  */
 package bankingsystemcrud_mari_kanepaul;
 
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Kane
@@ -15,8 +21,44 @@ public class TransactionLogsWindow extends javax.swing.JFrame {
     /**
      * Creates new form TransactionLogsWindow
      */
+    
+    private void centerTableText() {
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < jTable1.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+
+    void refreshTable() {
+    
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); 
+    
+    TransactionDAO dao = new TransactionDAO();
+    List<Transaction> transactlist = dao.getAllTransactions();
+    
+    for (Transaction transaction : transactlist) {
+        Object[] row = {
+            transaction.getTransactionid(),
+            transaction.getAccountid(),
+            transaction.getTransactiontype(),
+            transaction.getAmount(),
+            transaction.getTransactiondate()
+        };
+        model.addRow(row);
+    }
+    
+    
+    }
+    
     public TransactionLogsWindow() {
         initComponents();
+        refreshTable();
+        centerTableText();
     }
 
     /**
@@ -27,22 +69,175 @@ public class TransactionLogsWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jPanel5 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        searchField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        backBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel5.setLayout(new java.awt.BorderLayout());
 
-        pack();
+        jPanel4.setPreferredSize(new java.awt.Dimension(583, 40));
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setText("Search by:");
+        jPanel4.add(jLabel1, new java.awt.GridBagConstraints());
+
+        searchField.setPreferredSize(new java.awt.Dimension(150, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel4.add(searchField, gridBagConstraints);
+
+        jButton1.setText("Account ID");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel4.add(jButton1, gridBagConstraints);
+
+        jButton2.setText("Transaction Type");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel4.add(jButton2, gridBagConstraints);
+
+        jButton3.setText("All");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel4.add(jButton3, gridBagConstraints);
+
+        jPanel5.add(jPanel4, java.awt.BorderLayout.EAST);
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(203, 40));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        backBtn.setText("Back");
+        backBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backBtn.addActionListener(this::backBtnActionPerformed);
+        jPanel3.add(backBtn);
+
+        jPanel5.add(jPanel3, java.awt.BorderLayout.WEST);
+
+        getContentPane().add(jPanel5, java.awt.BorderLayout.PAGE_START);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Transaction ID", "Account ID", "Transaction Type", "Amount", "Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        setSize(new java.awt.Dimension(800, 600));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        
+        new MainMenu().setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String idStr = searchField.getText();
+        
+        if (idStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Field is empty.");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); 
+        
+        TransactionDAO dao = new TransactionDAO();
+        
+        int id;
+        
+        try {
+            id=Integer.parseInt(idStr);
+            List<Transaction> list = dao.getTransactionsByAccount(id);
+        for (Transaction t : list) {
+        Object[] row = {
+            t.getTransactionid(),
+            t.getAccountid(),
+            t.getTransactiontype(),
+            t.getAmount(),
+            t.getTransactiondate()
+        };      
+        model.addRow(row);
+    }
+        } catch(NumberFormatException e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        String type = searchField.getText().trim();
+        if (type.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter a transaction type (e.g., Deposit).");
+            return;
+        }   
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); 
+
+        TransactionDAO dao = new TransactionDAO();
+        List<Transaction> list = dao.getTransactionsByType(type);
+    
+        for (Transaction t : list) {
+            Object[] row = {t.getTransactionid(), t.getAccountid(), t.getTransactiontype(), t.getAmount(), t.getTransactiondate()};
+            model.addRow(row);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        refreshTable();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +265,17 @@ public class TransactionLogsWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
 }

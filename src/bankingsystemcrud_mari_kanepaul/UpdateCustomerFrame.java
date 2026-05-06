@@ -63,6 +63,7 @@ public class UpdateCustomerFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update Customer");
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N

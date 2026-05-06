@@ -89,4 +89,31 @@ public class TransactionDAO {
         }
         return transactions;
     }
+    
+    public List<Transaction> getTransactionsByType(String type) {
+    List<Transaction> transactions = new ArrayList<>();
+    String sql = "SELECT * FROM transaction WHERE transaction_type LIKE ?";
+    
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setString(1, "%" + type + "%");
+        
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                transactions.add(new Transaction(
+                    rs.getInt("transaction_id"),
+                    rs.getInt("Account_account_id"),
+                    rs.getString("transaction_type"),
+                    rs.getInt("amount"),
+                    rs.getDate("transaction_date")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return transactions;
+    }
+    
 }

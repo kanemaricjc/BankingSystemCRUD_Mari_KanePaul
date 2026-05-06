@@ -52,12 +52,15 @@ public class AccountDAO {
         }
         return accounts;
     }
-
-    public boolean updateAccountBalance(int accountId, int newBalance) {
+    
+    
+    
+    
+    public boolean updateAccountBalance(int accountId, Long newBalance) {
         String sql = "UPDATE account SET balance=? WHERE account_id=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, newBalance);
+            stmt.setLong(1, newBalance);
             stmt.setInt(2, accountId);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -78,52 +81,68 @@ public class AccountDAO {
         }
     }
 
-    public List<Account> searchAccounts(String keyword) {
-        List<Account> accounts = new ArrayList<>();
-        String sql = "SELECT a.* FROM account a JOIN customer c ON a.Customer_customer_id = c.customer_id " +
-                     "WHERE c.first_name LIKE ? OR c.last_name LIKE ? OR CAST(a.account_id AS CHAR) LIKE ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            String searchPattern = "%" + keyword + "%";
-            stmt.setString(1, searchPattern);
-            stmt.setString(2, searchPattern);
-            stmt.setString(3, searchPattern);
-            
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    accounts.add(new Account(
-                            rs.getInt("account_id"),
-                            rs.getInt("Customer_customer_id"),
-                            rs.getString("account_type"),
-                            rs.getInt("balance")
-                    ));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return accounts;
-    }
+    public List<AccountDetails> searchAccountsByCustomerName(String name) {
+    List<AccountDetails> list = new ArrayList<>();
     
-    public Account getAccountById(int accountId) {
-        String sql = "SELECT * FROM account WHERE account_id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, accountId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new Account(
-                            rs.getInt("account_id"),
-                            rs.getInt("Customer_customer_id"),
-                            rs.getString("account_type"),
-                            rs.getInt("balance")
-                    );
-                }
+    String sql = "SELECT a.account_id, c.first_name, c.last_name, c.email, c.phone_number, " +
+                 "a.account_type, a.balance FROM customer c " +
+                 "JOIN account a ON c.customer_id = a.Customer_customer_id " +
+                 "WHERE c.first_name LIKE ? OR c.last_name LIKE ?";
+    
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        String search = "%" + name + "%";
+        stmt.setString(1, search);
+        stmt.setString(2, search);
+        
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                list.add(new AccountDetails(
+                    rs.getInt("account_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("email"),
+                    rs.getString("phone_number"),
+                    rs.getString("account_type"),
+                    rs.getInt("balance")
+                ));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return null;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+        return list;
+    }      
+    
+    public AccountDetails getAccountDetailsById(int id) {
+    AccountDetails details = null;
+    String sql = "SELECT a.account_id, c.first_name, c.last_name, c.email, c.phone_number, " +
+                 "a.account_type, a.balance FROM customer c " +
+                 "JOIN account a ON c.customer_id = a.Customer_customer_id " +
+                 "WHERE a.account_id = ?";
+    
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setInt(1, id);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                details = new AccountDetails(
+                    rs.getInt("account_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("email"),
+                    rs.getString("phone_number"),
+                    rs.getString("account_type"),
+                    rs.getInt("balance")
+                );
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+        return details;
     }
     
     public List<AccountDetails> getAllAccountsWithNames() {

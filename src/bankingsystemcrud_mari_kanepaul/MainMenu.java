@@ -104,7 +104,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_viewAccBtnActionPerformed
 
     private void viewTransactionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTransactionBtnActionPerformed
-        new delAccountFrame().setVisible(true);
+        new TransactionLogsWindow().setVisible(true);
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_viewTransactionBtnActionPerformed
 

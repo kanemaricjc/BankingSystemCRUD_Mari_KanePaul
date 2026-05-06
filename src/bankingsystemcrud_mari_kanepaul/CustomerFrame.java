@@ -74,7 +74,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        updateMenu = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
@@ -89,8 +89,9 @@ public class CustomerFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         searchField = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        nameSearchBtn = new javax.swing.JButton();
+        searchId = new javax.swing.JButton();
+        allBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         addCustomerCard = new javax.swing.JPanel();
@@ -112,10 +113,10 @@ public class CustomerFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         delCustomerBtn = new javax.swing.JButton();
 
-        jMenuItem1.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
-        jMenuItem1.setText("Update");
-        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
-        jPopupMenu1.add(jMenuItem1);
+        updateMenu.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        updateMenu.setText("Update");
+        updateMenu.addActionListener(this::updateMenuActionPerformed);
+        jPopupMenu1.add(updateMenu);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,6 +201,8 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         jPanel2.add(jPanel5);
 
+        getContentPane().add(jPanel2, java.awt.BorderLayout.NORTH);
+
         parentPanel.setLayout(new java.awt.CardLayout());
 
         pnlTable.setBackground(new java.awt.Color(240, 244, 249));
@@ -218,23 +221,27 @@ public class CustomerFrame extends javax.swing.JFrame {
         searchField.setPreferredSize(new java.awt.Dimension(150, 22));
         jPanel1.add(searchField);
 
-        jButton5.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
-        jButton5.setText("Customer Name");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setDefaultCapable(false);
-        jButton5.setFocusPainted(false);
-        jButton5.setFocusable(false);
-        jButton5.addActionListener(this::jButton5ActionPerformed);
-        jPanel1.add(jButton5);
+        nameSearchBtn.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        nameSearchBtn.setText("Customer Name");
+        nameSearchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nameSearchBtn.setDefaultCapable(false);
+        nameSearchBtn.setFocusPainted(false);
+        nameSearchBtn.setFocusable(false);
+        nameSearchBtn.addActionListener(this::nameSearchBtnActionPerformed);
+        jPanel1.add(nameSearchBtn);
 
-        jButton6.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
-        jButton6.setText("Customer ID");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setDefaultCapable(false);
-        jButton6.setFocusPainted(false);
-        jButton6.setFocusable(false);
-        jButton6.addActionListener(this::jButton6ActionPerformed);
-        jPanel1.add(jButton6);
+        searchId.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        searchId.setText("Customer ID");
+        searchId.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchId.setDefaultCapable(false);
+        searchId.setFocusPainted(false);
+        searchId.setFocusable(false);
+        searchId.addActionListener(this::searchIdActionPerformed);
+        jPanel1.add(searchId);
+
+        allBtn.setText("All");
+        allBtn.addActionListener(this::allBtnActionPerformed);
+        jPanel1.add(allBtn);
 
         pnlTable.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
@@ -439,30 +446,7 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         parentPanel.add(delCustomerCard, "delCustomerCard");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(parentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(parentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
 
         setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
@@ -488,13 +472,69 @@ public class CustomerFrame extends javax.swing.JFrame {
         cl.show(parentPanel, "delCustomerCard");
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void nameSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameSearchBtnActionPerformed
+        
+        String name = searchField.getText().trim();
+        
+        if (name.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter a name to search.");
+        return;
+        }
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); 
+
+        CustomerDAO dao = new CustomerDAO();
+        List<Customer> list = dao.searchByName(name);
+    
+        for (Customer c : list) {
+            Object[] row = {
+                c.getCustomerid(), 
+                c.getFname(), 
+                c.getLname(), 
+                c.getEmail(), 
+                c.getPhonenumber()
+            };      
+            model.addRow(row);
+        }
+    
+    }//GEN-LAST:event_nameSearchBtnActionPerformed
+
+    private void searchIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchIdActionPerformed
+        
+        String idStr = searchField.getText();
+        
+        if (idStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Field is empty.");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); 
+        
+        CustomerDAO dao = new CustomerDAO();
+        
+        int id;
+
+        try {
+            id=Integer.parseInt(idStr);
+            List<Customer> list = dao.searchByID(id);
+        for (Customer c : list) {
+        Object[] row = {
+            c.getCustomerid(),
+            c.getFname(),
+            c.getLname(),
+            c.getEmail(),
+            c.getPhonenumber()
+        };      
+        model.addRow(row);
+    }
+        } catch(NumberFormatException e) {
+            e.printStackTrace();
+        }
+        
+        
+    }//GEN-LAST:event_searchIdActionPerformed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
              if (evt.isPopupTrigger() && evt.getComponent() instanceof javax.swing.JTable) {
@@ -571,7 +611,7 @@ public class CustomerFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_addCustomerBtnActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void updateMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMenuActionPerformed
     
     int selectedRow = jTable1.getSelectedRow();
     
@@ -583,19 +623,19 @@ public class CustomerFrame extends javax.swing.JFrame {
         String email = jTable1.getValueAt(selectedRow, 3).toString();
         String phonenumber = jTable1.getValueAt(selectedRow, 4).toString();
 
-        UpdateCustomerFrame updateFrame = new UpdateCustomerFrame(this, id, fName, lName, email, phonenumber);
-        updateFrame.setVisible(true);
+        new UpdateCustomerFrame(this, id, fName, lName, email, phonenumber).setVisible(true);
+        
     }
     
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_updateMenuActionPerformed
 
     private void numberFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberFieldKeyTyped
     
-        char c = evt.getKeyChar();
-    
-    if (!Character.isDigit(c)) {
-        evt.consume();
-    }
+    char c = evt.getKeyChar();
+
+if (!Character.isDigit(c)) {
+    evt.consume();
+}
     // TODO add your handling code here:
     }//GEN-LAST:event_numberFieldKeyTyped
 
@@ -608,6 +648,12 @@ public class CustomerFrame extends javax.swing.JFrame {
     }        
 
     }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void allBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allBtnActionPerformed
+    refreshTable();
+    gotoPnlTable();
+    // TODO add your handling code here:
+    }//GEN-LAST:event_allBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -638,6 +684,7 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JButton addCustomerBtn;
     private javax.swing.JPanel addCustomerCard;
     private javax.swing.JLabel addnewStudentLabel;
+    private javax.swing.JButton allBtn;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton delCustomerBtn;
     private javax.swing.JPanel delCustomerCard;
@@ -646,8 +693,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -655,7 +700,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -669,9 +713,12 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lastNameField;
+    private javax.swing.JButton nameSearchBtn;
     private javax.swing.JTextField numberField;
     private javax.swing.JPanel parentPanel;
     private javax.swing.JPanel pnlTable;
     private javax.swing.JTextField searchField;
+    private javax.swing.JButton searchId;
+    private javax.swing.JMenuItem updateMenu;
     // End of variables declaration//GEN-END:variables
 }
